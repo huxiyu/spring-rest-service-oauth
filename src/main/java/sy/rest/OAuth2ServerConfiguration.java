@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package sy.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,6 +34,8 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
+import sy.rest.service.CustomUserDetailsService;
+
 @Configuration
 public class OAuth2ServerConfiguration {
 
@@ -42,13 +44,13 @@ public class OAuth2ServerConfiguration {
 	@Configuration
 	@EnableResourceServer
 	protected static class ResourceServerConfiguration extends
-			ResourceServerConfigurerAdapter {
+	ResourceServerConfigurerAdapter {
 
 		@Override
 		public void configure(ResourceServerSecurityConfigurer resources) {
 			// @formatter:off
 			resources
-				.resourceId(RESOURCE_ID);
+			.resourceId(RESOURCE_ID);
 			// @formatter:on
 		}
 
@@ -56,9 +58,10 @@ public class OAuth2ServerConfiguration {
 		public void configure(HttpSecurity http) throws Exception {
 			// @formatter:off
 			http
-				.authorizeRequests()
-					.antMatchers("/users").hasRole("ADMIN")
-					.antMatchers("/greeting").authenticated();
+			.authorizeRequests()
+			.antMatchers("/users").hasRole("ADMIN")
+			.antMatchers("/greeting").authenticated()
+			.antMatchers("/employees").authenticated();
 			// @formatter:on
 		}
 
@@ -67,7 +70,7 @@ public class OAuth2ServerConfiguration {
 	@Configuration
 	@EnableAuthorizationServer
 	protected static class AuthorizationServerConfiguration extends
-			AuthorizationServerConfigurerAdapter {
+	AuthorizationServerConfigurerAdapter {
 
 		private TokenStore tokenStore = new InMemoryTokenStore();
 
@@ -83,23 +86,23 @@ public class OAuth2ServerConfiguration {
 				throws Exception {
 			// @formatter:off
 			endpoints
-				.tokenStore(this.tokenStore)
-				.authenticationManager(this.authenticationManager)
-				.userDetailsService(userDetailsService);
+			.tokenStore(this.tokenStore)
+			.authenticationManager(this.authenticationManager)
+			.userDetailsService(userDetailsService);
 			// @formatter:on
 		}
 
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 			// @formatter:off
-			clients
-				.inMemory()
-					.withClient("clientapp")
-						.authorizedGrantTypes("password", "refresh_token")
-						.authorities("USER")
-						.scopes("read", "write")
-						.resourceIds(RESOURCE_ID)
-						.secret("123456");
+			clients.inMemory()
+			.withClient("remoteclientapp")
+			.secret("schedule@restful")
+			.authorizedGrantTypes("password", "refresh_token")
+			.authorities("USER")
+			.scopes("read", "write")
+			.resourceIds(RESOURCE_ID);
+
 			// @formatter:on
 		}
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello.data;
+package sy.rest.data;
 
 import org.springframework.data.repository.CrudRepository;
 

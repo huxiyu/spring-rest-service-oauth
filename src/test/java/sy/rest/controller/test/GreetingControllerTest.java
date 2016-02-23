@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package sy.rest.controller.test;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
@@ -42,6 +42,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.context.WebApplicationContext;
+
+import sy.rest.Application;
+import sy.rest.controller.GreetingController;
 
 /**
  * @author Roy Clarkson
@@ -93,7 +96,7 @@ public class GreetingControllerTest {
 										MediaType.APPLICATION_FORM_URLENCODED)
 								.param("username", username)
 								.param("password", password)
-								.param("grant_type", "password")
+								.param("grant_type", "secret")
 								.param("scope", "read write")
 								.param("client_id", "clientapp")
 								.param("client_secret", "123456"))

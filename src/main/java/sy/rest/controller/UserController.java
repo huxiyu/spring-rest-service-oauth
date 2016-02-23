@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2014-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package hello;
+package sy.rest.controller;
 
-import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hello.data.User;
+import sy.rest.data.User;
+import sy.rest.data.UserRepository;
 
 @RestController
-public class GreetingController {
+public class UserController {
 
-	private static final String template = "Hello, %s!";
+	private final UserRepository userRepository;
 
-	private final AtomicLong counter = new AtomicLong();
+	@Autowired
+	public UserController(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
-	@RequestMapping("/greeting")
-	public Greeting greeting(@AuthenticationPrincipal User user) {
-		return new Greeting(counter.incrementAndGet(),
-				String.format(template, user.getName()));
+	@RequestMapping("/users")
+	public Iterable<User> getUsers() {
+		return userRepository.findAll();
 	}
 
 }

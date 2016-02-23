@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package sy.rest.controller.test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -34,6 +34,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import sy.rest.Application;
+import sy.rest.controller.HomeController;
 
 /**
  * @author Roy Clarkson

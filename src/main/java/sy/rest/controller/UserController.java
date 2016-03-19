@@ -34,7 +34,7 @@ public class UserController {
 		this.userRepository = userRepository;
 	}
 
-	@RequestMapping("/users")
+//	@RequestMapping("/users")
 	public Iterable<User> getUsers() {
 		return userRepository.findAll();
 	}

@@ -33,7 +33,7 @@ public class GreetingController {
 
 	private final AtomicLong counter = new AtomicLong();
 
-	@RequestMapping("/greeting")
+	//@RequestMapping("/greeting")
 	public Greeting greeting(@AuthenticationPrincipal User user) {
 		return new Greeting(counter.incrementAndGet(),
 				String.format(template, user.getName()));

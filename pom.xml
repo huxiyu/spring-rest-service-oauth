@@ -6,8 +6,8 @@
 	<groupId>sy.hxy</groupId>
 	<artifactId>spring-rest-service-oauth</artifactId>
 	<version>0.1.0</version>
-	<!-- <packaging>jar</packaging> -->
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
+	<!-- <packaging>war</packaging> -->
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -24,7 +24,7 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "home";
+		return "Service is already.";
 	}
 
 }

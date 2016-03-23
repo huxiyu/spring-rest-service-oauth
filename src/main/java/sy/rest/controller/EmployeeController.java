@@ -47,6 +47,8 @@ public class EmployeeController {
 				int randomNum = (int)(Math.random()*900)+100; 
 				employee.setName(employee.getName() + randomNum);
 			}
+			// 设置employeeidCard为空，因为不能为Null
+			employee.setEmployeeidCard("");
 			// 存储employee
 			employeeRepository.save(employee);
 			response.put("message", "success");
